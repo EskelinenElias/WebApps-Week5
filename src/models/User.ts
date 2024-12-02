@@ -1,5 +1,4 @@
 import { Document, Types, Schema, model } from "mongoose";
-import { ITodo, TodoSchema } from "./Todo";
 
 interface ITodo extends Document {
   todo: string; 
