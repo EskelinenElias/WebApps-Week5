@@ -1,10 +1,10 @@
 // Function to add todo
-async function addTodo(user, todo) {
+async function addTodo(name, todo) {
   // Send POST request
   const response = await fetch('/add', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ user, todo })
+    body: JSON.stringify({ name, todo })
   });
   return response.json();
 }
