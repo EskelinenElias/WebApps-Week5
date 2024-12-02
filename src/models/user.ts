@@ -1,5 +1,5 @@
 import { Document, Types, Schema, model } from "mongoose";
-import { ITodo, TodoSchema } from "./todo";
+import { ITodo, TodoSchema } from "./Todo";
 
 interface IUser extends Document {
   name: string; 
@@ -13,4 +13,4 @@ const UserSchema = new Schema({
 
 const User = model<IUser>("User", UserSchema);
 
-export { User, IUser };
+export { User };

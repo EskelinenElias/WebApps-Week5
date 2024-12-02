@@ -5,7 +5,7 @@ interface ITodo extends Document {
 }
 
 let TodoSchema = new Schema({
-  todo: {type: String, required: true}
+  todo: { type: String, required: true }
 })
 
 const Todo = model<ITodo>("TUser", TodoSchema); 

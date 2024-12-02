@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const user_1 = require("../models/user");
+const User_1 = require("../models/User");
 const router = (0, express_1.Router)();
 router.post('/', async (req, res) => {
     try {
@@ -12,10 +12,10 @@ router.post('/', async (req, res) => {
             return;
         }
         // Find the user by name
-        let user = await user_1.User.findOne({ name: name });
+        let user = await User_1.User.findOne({ name: name });
         if (!user) {
             // User not found; create new user
-            user = new user_1.User({
+            user = new User_1.User({
                 name: name,
                 todos: [{ todo }],
             });
