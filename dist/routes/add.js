@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
         // Save changes
         await user.save();
         // Send success response
-        res.status(200).json({ message: `Todo "${todo}" added successfully for user "${name}".` });
+        res.status(200).json(`Todo added successfully for user ${name}.`);
     }
     catch (error) {
         // Log error and send failure response
