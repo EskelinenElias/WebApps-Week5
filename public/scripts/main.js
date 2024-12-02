@@ -134,6 +134,7 @@ function displayTodos(name, todos) {
     const listItem = document.createElement('li');
     // Create label
     const label = document.createElement('label'); 
+    label.setAttribute("class", "todoLabel");
     // Create span
     const span = document.createElement('span');
     span.textContent = `${todo.todo}`;
