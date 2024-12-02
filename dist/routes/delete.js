@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const router = (0, express_1.Router)();
-// // DELETE route to delete a user
+// DELETE route to delete a user
 // router.delete('/', (req: Request, res: Response) => {
 //   if (!req.body.user) {
 //     res.status(400).json(`Could not delete user.`);

@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 
 const router = Router();
 
-// // DELETE route to delete a user
+// DELETE route to delete a user
 // router.delete('/', (req: Request, res: Response) => {
 //   if (!req.body.user) {
 //     res.status(400).json(`Could not delete user.`);
