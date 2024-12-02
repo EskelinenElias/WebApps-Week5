@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from "express";
 import path from "path"; 
 import morgan from "morgan";
 import router from "./routes"; 
-import database from "./config/database"; 
+import database from "./config/database"
 
 // Create app
 const app: Express = express()
@@ -16,5 +16,7 @@ app.use('/', router)
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../public')))
+
+database; 
 
 export default app; 
