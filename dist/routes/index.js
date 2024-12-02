@@ -7,7 +7,7 @@ const express_1 = require("express");
 const add_1 = __importDefault(require("./add"));
 const users_1 = __importDefault(require("./users"));
 const todos_1 = __importDefault(require("./todos"));
-// import deleteRoutes from "./delete"; 
+const checked_1 = __importDefault(require("./checked"));
 const update_1 = __importDefault(require("./update"));
 // Create router
 const router = (0, express_1.Router)();
@@ -15,6 +15,7 @@ const router = (0, express_1.Router)();
 router.use('/add', add_1.default);
 router.use('/todos', todos_1.default);
 router.use('/users', users_1.default);
+router.use('/updateTodo', checked_1.default);
 // router.use('/todos', todoRoutes);
 // router.use('/delete', deleteRoutes); 
 router.use('/update', update_1.default);

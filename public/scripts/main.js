@@ -48,6 +48,21 @@ async function deleteTodo(name, todo) {
   })
 }
 
+async function swapTodoChecked(name, todo, checked) {
+  // Delete todo
+  await fetch('/updateTodo', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, todo, checked })
+  }).then((response) => {
+    return response.json();
+  }).then((data) => {
+    console.log(`Successfully updated todo ${todo} of user ${name}`, data.body);
+  }).catch((error) => {
+    console.error(`Error occurred while attempting to update ${todo} of user ${name}`, error);
+  })
+}
+
 // Add new todo when form is submitted
 document.getElementById('todoForm').addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -140,7 +155,16 @@ function displayTodos(name, todos) {
       const todos = response.todos; 
       displayTodos(name, todos); 
       
-    }); 
+    });
+    // Create checkbox
+    const checkbox = document.createElement('input'); 
+    checkbox.setAttribute("type", "checkbox")
+    checkbox.checked = todo.checked; 
+    checkbox.addEventListener("click", async () => { 
+      await swapTodoChecked(name, todo.todo, checkbox.checked);
+    });
+    // Add checkbox to the list item
+    listItem.appendChild(checkbox); 
     // Add delete button to the list item
     listItem.appendChild(deleteLink); 
     // Add item to the list

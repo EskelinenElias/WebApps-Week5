@@ -2,10 +2,12 @@ import mongoose, { Document, Schema, model } from "mongoose";
 
 interface ITodo {
   todo: string;
+  checked: boolean; 
 }
 
 const TodoSchema = new Schema<ITodo>({
   todo: { type: String, required: true },
+  checked: {type: Boolean, required: true, default: false}
 });
 
 const Todo = model<ITodo>("Todo", TodoSchema);

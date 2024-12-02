@@ -4,6 +4,7 @@ exports.Todo = exports.User = void 0;
 const mongoose_1 = require("mongoose");
 const TodoSchema = new mongoose_1.Schema({
     todo: { type: String, required: true },
+    checked: { type: Boolean, required: true, default: false }
 });
 const Todo = (0, mongoose_1.model)("Todo", TodoSchema);
 exports.Todo = Todo;
