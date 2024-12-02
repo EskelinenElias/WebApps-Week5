@@ -35,12 +35,11 @@ async function deleteUser(user) {
 // Function to delete a todo from a user
 async function deleteTodo(name, todo) {
   // Delete todo
-  fetch('/update', {
+  await fetch('/update', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, todo })
   }).then((response) => {
-    console.log(response)
     return response.json();
   }).then((data) => {
     console.log(`Successfully deleted todo ${todo} of user ${name}`, data.body);
@@ -80,7 +79,7 @@ document.getElementById('searchForm').addEventListener('submit', async (event) =
   // Fetch todos for user
   const response = await getTodos(name); 
   // Check response
-  if (!response || !response.todos) {
+  if (!response || !response.todos) {
     console.error("Could not get todos"); 
     return; 
   }
@@ -94,7 +93,7 @@ document.getElementById("deleteUser").addEventListener("click", async () => {
   // Get user 
   const name = document.getElementById('searchInput').value;
   // Delete user
-  fetch('/delete', {
+  await fetch('/delete', {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: name })
@@ -111,6 +110,7 @@ document.getElementById("deleteUser").addEventListener("click", async () => {
 // Function to display todos on the page
 function displayTodos(name, todos) {
   // Clear ToDo list
+  console.log("Clearing list")
   const todoList = document.getElementById("todoList"); 
   todoList.innerHTML = ""; 
   // Add each ToDo to the list
@@ -126,8 +126,9 @@ function displayTodos(name, todos) {
     // Delete ToDo if the delete button is clicked
     deleteLink.addEventListener("click", async () => {
       // Delete ToDo
-      deleteTodo(name, todo.todo)
+      await deleteTodo(name, todo.todo)
       // Fetch updated todos for user
+      console.log("Fetching remaining todos...")
       const response = await getTodos(name); 
       // Check response
       if (!response || !response.todos) {
@@ -135,8 +136,10 @@ function displayTodos(name, todos) {
         return; 
       }
       // Update todos list 
+      console.log(`Updating todos...`)
       const todos = response.todos; 
       displayTodos(name, todos); 
+      
     }); 
     // Add delete button to the list item
     listItem.appendChild(deleteLink); 
