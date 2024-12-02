@@ -6,31 +6,36 @@
   <title>Advanced Web Applications: Week 4</title>
   <script src="./scripts/main.js" defer></script>
   <link rel="stylesheet" type="text/css" href="./stylesheets/styles.css">
+  <!-- MATERIALIZE CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
   <header>
     <h1>Welcome to ToDo app!<h1>
   </header>
   <main>
-    <div class="container" id="form-container">
-      <h1>Add ToDo</h1>
-      <form id="todoForm">
-        <label for="userInput">User input:</label>
-        <input type="text" id="userInput" name="user"/>
-        <label for="todoInput">ToDo input:</label>
-        <input type="text" id="todoInput" name="todos"/>
-        <button type="submit" id="submit-data">Add</button>
-      </form> 
-      <p id="status"></p>
-    </div>
-    <div class="container" id="list-container">
-      <h1>Check ToDos</h1>
-      <form id="searchForm">
-        <input type="text" id="searchInput" name="searchTerm"/>
-        <button type="submit" id="search">Search</button>
-      </form>
-      <ul id="todoList"></ul>
-      <button id="deleteUser">Delete user</button>
+    <div class="container">
+      <div class="col" id="form-container">
+        <h1>Add ToDo</h1>
+        <form id="todoForm">
+          <label for="userInput">User input:</label>
+          <input type="text" id="userInput" name="user"/>
+          <label for="todoInput">ToDo input:</label>
+          <input type="text" id="todoInput" name="todos"/>
+          <button type="submit" id="submit-data">Add</button>
+        </form> 
+        <p id="status"></p>
+      </div>
+      <div class="col" id="list-container">
+        <h1>Check ToDos</h1>
+        <form id="searchForm">
+          <input type="text" id="searchInput" name="searchTerm"/>
+          <button type="submit" id="search">Search</button>
+        </form>
+        <ul id="todoList"></ul>
+        <button id="deleteUser">Delete user</button>
+      </div>
     </div>
   </main>
 </body>

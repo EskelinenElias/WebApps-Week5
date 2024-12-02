@@ -159,6 +159,8 @@ function displayTodos(name, todos) {
     // Create checkbox
     const checkbox = document.createElement('input'); 
     checkbox.setAttribute("type", "checkbox")
+    checkbox.setAttribute("id", "myCheckbox")
+    checkbox.setAttribute("class", "checkBoxes")
     checkbox.checked = todo.checked; 
     checkbox.addEventListener("click", async () => { 
       await swapTodoChecked(name, todo.todo, checkbox.checked);
