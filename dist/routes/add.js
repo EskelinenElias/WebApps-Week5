@@ -5,7 +5,8 @@ const User_1 = require("../models/User");
 const router = (0, express_1.Router)();
 router.post('/', async (req, res) => {
     try {
-        const { name, todo } = req.body;
+        const name = req.body.name || null;
+        const todo = req.body.todo || null;
         // Validate input
         if (!name || !todo) {
             res.status(400).json({ error: "User name and todo are required." });

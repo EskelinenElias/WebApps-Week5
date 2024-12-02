@@ -5,7 +5,8 @@ const router = Router();
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const { name, todo } = req.body;
+    const name = req.body.name || null; 
+    const todo = req.body.todo || null; 
     // Validate input
     if (!name || !todo) {
       res.status(400).json({ error: "User name and todo are required." }); 
