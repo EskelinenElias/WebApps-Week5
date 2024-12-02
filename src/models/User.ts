@@ -1,6 +1,16 @@
 import { Document, Types, Schema, model } from "mongoose";
 import { ITodo, TodoSchema } from "./Todo";
 
+interface ITodo extends Document {
+  todo: string; 
+}
+
+let TodoSchema = new Schema({
+  todo: { type: String, required: true }
+})
+
+const Todo = model<ITodo>("TUser", TodoSchema); 
+
 interface IUser extends Document {
   name: string; 
   todos: Types.DocumentArray<ITodo>;
