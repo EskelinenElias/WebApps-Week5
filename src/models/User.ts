@@ -8,6 +8,8 @@ const TodoSchema = new Schema<ITodo>({
   todo: { type: String, required: true },
 });
 
+const Todo = model<ITodo>("Todo", TodoSchema);
+
 interface IUser extends Document {
   name: string;
   todos: ITodo[];
@@ -18,7 +20,6 @@ const UserSchema = new Schema<IUser>({
   todos: [TodoSchema],
 });
 
-const Todo = model<ITodo>("Todo", TodoSchema);
 const User = model<IUser>("User", UserSchema);
 
 export { User, Todo };

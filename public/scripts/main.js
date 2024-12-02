@@ -9,60 +9,17 @@ async function addTodo(name, todo) {
   return response.json();
 }
 
-// Function to get todo
-async function getTodos(user) {
+// Function to get todos for user
+async function getTodos(name) {
   try {
     // Send POST request
-    const response = await fetch(`/todos/${user}`);
+    const response = await fetch(`/todos/${name}`);
     // Parse the response
     return await response.json();
   } catch(error) {
-    console.error(`Could not get todos for user ${user}`, error); 
+    console.error(`Could not get todos for user ${name}`, error); 
     return null; 
   }
-}
-
-// Function to display todos on the page
-function displayTodos(name, todos) {
-  // Clear ToDo list
-  const todoList = document.getElementById("todoList"); 
-  todoList.innerHTML = ""; 
-  // Add each ToDo to the list
-  todos.forEach(todo => {
-    // Create new list item
-    const listItem = document.createElement('li');
-    listItem.textContent = `${todo}`;
-    // Add delete button
-    const deleteLink = document.createElement("a");
-    deleteLink.textContent = "Delete";
-    deleteLink.href = "#";
-    deleteLink.classList.add("delete-task");
-    // Delete ToDo if the delete button is clicked
-    deleteLink.addEventListener("click", () => {
-      // Delete ToDo
-      deleteTodo(name, todo)
-      // Update Todo list
-      updateTodos(name)
-    }); 
-    // Add delete button to the list item
-    listItem.appendChild(deleteLink); 
-    // Add item to the list
-    todoList.appendChild(listItem);
-  }); 
-}
-
-// Function to update ToDo list
-async function updateTodos(name) {
-  // Send POST request
-  const response = await getTodos(name);
-  console.log(response) 
-  if (!response.todos) { 
-    console.log(`No todos for user ${name}.`)
-    return; 
-  }
-  const todos = response.todos; 
-  // List todos
-  displayTodos(name, todos); 
 }
 
 async function deleteUser(user) {
@@ -113,14 +70,23 @@ document.getElementById('todoForm').addEventListener('submit', async (event) => 
 document.getElementById('searchForm').addEventListener('submit', async (event) => {
   event.preventDefault();
   // Get form data
-  const user = document.getElementById('searchInput').value;
+  const name = document.getElementById('searchInput').value;
   // Check form data
-  if (!user) {
+  if (!name) {
     console.error("Could not get todos"); 
     return; 
   }
-  // Update todo list
-  updateTodos(user); 
+  // Fetch todos for user
+  const response = await getTodos(name); 
+  // Check response
+  if (!response || !response.todos) {
+    console.error("Could not get todos"); 
+    return; 
+  }
+  // Update todos list 
+  const todos = response.todos; 
+  console.log(todos)
+  displayTodos(name, todos); 
 }); 
 
 // Delete user if delete button is pressed
@@ -140,3 +106,34 @@ document.getElementById("deleteUser").addEventListener("click", async () => {
     console.error(`Error occurred while attempting to delete user ${user}`, error);
   })
 }); 
+
+
+
+// Function to display todos on the page
+function displayTodos(name, todos) {
+  // Clear ToDo list
+  const todoList = document.getElementById("todoList"); 
+  todoList.innerHTML = ""; 
+  // Add each ToDo to the list
+  todos.forEach(todo => {
+    // Create new list item
+    const listItem = document.createElement('li');
+    listItem.textContent = `${todo.todo}`;
+    // Add delete button
+    const deleteLink = document.createElement("a");
+    deleteLink.textContent = "Delete";
+    deleteLink.href = "#";
+    deleteLink.classList.add("delete-task");
+    // Delete ToDo if the delete button is clicked
+    deleteLink.addEventListener("click", () => {
+      // Delete ToDo
+      deleteTodo(name, todo)
+      // Update Todo list
+      updateTodos(name)
+    }); 
+    // Add delete button to the list item
+    listItem.appendChild(deleteLink); 
+    // Add item to the list
+    todoList.appendChild(listItem);
+  }); 
+}
