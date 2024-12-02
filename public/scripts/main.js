@@ -40,6 +40,7 @@ async function deleteTodo(name, todo) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, todo })
   }).then((response) => {
+    console.log(response)
     return response.json();
   }).then((data) => {
     console.log(`Successfully deleted todo ${todo} of user ${name}`, data.body);
@@ -85,20 +86,20 @@ document.getElementById('searchForm').addEventListener('submit', async (event) =
   }
   // Update todos list 
   const todos = response.todos; 
-  console.log(todos)
   displayTodos(name, todos); 
 }); 
 
 // Delete user if delete button is pressed
 document.getElementById("deleteUser").addEventListener("click", async () => {
   // Get user 
-  const user = document.getElementById('searchInput').value;
+  const name = document.getElementById('searchInput').value;
   // Delete user
   fetch('/delete', {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ user })
+    body: JSON.stringify({ name: name })
   }).then((response) => {
+    console.log(response)
     return response.json();
   }).then((data) => {
     console.log(`Successfully deleted user ${user}`, data.body);
@@ -106,8 +107,6 @@ document.getElementById("deleteUser").addEventListener("click", async () => {
     console.error(`Error occurred while attempting to delete user ${user}`, error);
   })
 }); 
-
-
 
 // Function to display todos on the page
 function displayTodos(name, todos) {
@@ -125,11 +124,19 @@ function displayTodos(name, todos) {
     deleteLink.href = "#";
     deleteLink.classList.add("delete-task");
     // Delete ToDo if the delete button is clicked
-    deleteLink.addEventListener("click", () => {
+    deleteLink.addEventListener("click", async () => {
       // Delete ToDo
-      deleteTodo(name, todo)
-      // Update Todo list
-      updateTodos(name)
+      deleteTodo(name, todo.todo)
+      // Fetch updated todos for user
+      const response = await getTodos(name); 
+      // Check response
+      if (!response || !response.todos) {
+        console.error("Could not get todos"); 
+        return; 
+      }
+      // Update todos list 
+      const todos = response.todos; 
+      displayTodos(name, todos); 
     }); 
     // Add delete button to the list item
     listItem.appendChild(deleteLink); 

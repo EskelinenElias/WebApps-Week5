@@ -8,6 +8,7 @@ router.put('/', async (req: Request, res: Response) => {
   // Parse request
   const name: string = req.body.name;
   const todo: string = req.body.todo; 
+  console.log("REQUEST:", name, todo)
   // Validate request
   if (!name || !todo) {
     res.status(500).json({ message: "Invalid request; Can't delete todo" });
