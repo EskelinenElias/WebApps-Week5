@@ -18,12 +18,12 @@ router.post('/', async (req, res) => {
             // User not found; create new user
             user = new User_1.User({
                 name: name,
-                todos: [{ todo }],
+                todos: [new User_1.Todo({ todo: todo })],
             });
         }
         else {
             // User found; add new todo to the todos array
-            user.todos.push({ todo: todo });
+            user.todos.push(new User_1.Todo({ todo: todo }));
         }
         // Save changes
         await user.save();

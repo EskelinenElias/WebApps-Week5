@@ -1,12 +1,12 @@
 import { Router, Request, Response } from 'express';
-import { User } from '../models/User';
+import { User, Todo } from '../models/User';
 
 const router = Router();
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const name = req.body.name || null; 
-    const todo = req.body.todo || null; 
+    const name: string = req.body.name || null; 
+    const todo: string = req.body.todo || null; 
     // Validate input
     if (!name) {
       res.status(400).json({ error: "User name and todo are required." }); 
@@ -18,11 +18,11 @@ router.post('/', async (req: Request, res: Response) => {
       // User not found; create new user
       user = new User({
         name: name,
-        todos: [{ todo }],
+        todos: [new Todo({todo: todo})],
       });
     } else {
       // User found; add new todo to the todos array
-      user.todos.push({ todo: todo }); 
+      user.todos.push(new Todo({todo: todo})); 
     }
     // Save changes
     await user.save();

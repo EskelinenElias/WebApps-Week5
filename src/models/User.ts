@@ -1,25 +1,25 @@
-import { Document, Types, Schema, model } from "mongoose";
+import mongoose, { Document, Types, Schema, ObjectId, model } from "mongoose";
 
 interface ITodo extends Document {
   todo: string; 
 }
 
-let TodoSchema = new Schema({
+let TodoSchema = new Schema<ITodo>({
   todo: { type: String, required: true }
 })
 
 const Todo = model<ITodo>("TUser", TodoSchema); 
 
 interface IUser extends Document {
-  name: string; 
-  todos: Types.DocumentArray<ITodo>;
+  name: string, 
+  todos: ITodo[]
 }
 
 const UserSchema = new Schema({
   name: { type: String, required: true },
-  todos: { type: [TodoSchema], default: [] }
+  todos: [ TodoSchema ]
 });
 
 const User = model<IUser>("User", UserSchema);
 
-export { User };
+export { User, Todo };
