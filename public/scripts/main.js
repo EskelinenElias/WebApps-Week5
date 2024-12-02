@@ -132,7 +132,11 @@ function displayTodos(name, todos) {
   todos.forEach(todo => {
     // Create new list item
     const listItem = document.createElement('li');
-    listItem.textContent = `${todo.todo}`;
+    // Create label
+    const label = document.createElement('label'); 
+    // Create span
+    const span = document.createElement('span');
+    span.textContent = `${todo.todo}`;
     // Add delete button
     const deleteLink = document.createElement("a");
     deleteLink.textContent = "Delete";
@@ -165,10 +169,11 @@ function displayTodos(name, todos) {
     checkbox.addEventListener("click", async () => { 
       await swapTodoChecked(name, todo.todo, checkbox.checked);
     });
-    // Add checkbox to the list item
-    listItem.appendChild(checkbox); 
-    // Add delete button to the list item
-    listItem.appendChild(deleteLink); 
+    // Add checkbox and span to label
+    label.appendChild(checkbox); 
+    label.appendChild(span); 
+    // Add label to list item
+    listItem.appendChild(label); 
     // Add item to the list
     todoList.appendChild(listItem);
   }); 

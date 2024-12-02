@@ -12,7 +12,11 @@
 </head>
 <body>
   <header>
-    <h1>Welcome to ToDo app!<h1>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">ToDo App</a>
+      </div>
+    </nav>
   </header>
   <main>
     <div class="container">
@@ -23,7 +27,7 @@
           <input type="text" id="userInput" name="user"/>
           <label for="todoInput">ToDo input:</label>
           <input type="text" id="todoInput" name="todos"/>
-          <button type="submit" id="submit-data">Add</button>
+          <button type="submit" id="submit-data" class="btn">Add</button>
         </form> 
         <p id="status"></p>
       </div>
@@ -31,10 +35,10 @@
         <h1>Check ToDos</h1>
         <form id="searchForm">
           <input type="text" id="searchInput" name="searchTerm"/>
-          <button type="submit" id="search">Search</button>
+          <button type="submit" id="search" class="btn">Search</button>
         </form>
         <ul id="todoList"></ul>
-        <button id="deleteUser">Delete user</button>
+        <button id="deleteUser" class="btn">Delete user</button>
       </div>
     </div>
   </main>

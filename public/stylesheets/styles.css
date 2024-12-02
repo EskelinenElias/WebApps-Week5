@@ -33,6 +33,18 @@ main {
     gap: 5%; 
 }
 
+.nav-wrapper {
+    
+    text-align: center;
+    padding-left: auto; 
+    padding-right: auto;
+}
+
+.nav-wrapper a {
+    margin: 0; 
+    padding: 0;
+}
+
 .container {
     display: flex;
     justify-content: center;
