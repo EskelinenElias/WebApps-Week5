@@ -172,6 +172,7 @@ function displayTodos(name, todos) {
     // Add checkbox and span to label
     label.appendChild(checkbox); 
     label.appendChild(span); 
+    label.appendChild(deleteLink); 
     // Add label to list item
     listItem.appendChild(label); 
     // Add item to the list
